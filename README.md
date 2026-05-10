@@ -54,9 +54,7 @@ This simulates systems that evolved over time without strict schema enforcement.
 Fields that should have consistent types are deliberately mixed.
 
 **Examples:**
-- id: sometimes an interger (1), sometimes a string ("1")
-- userId: in posts, sometimes an integer, sometimes a string
-- missing or nullk values in optional fields
+- id/userId/postId: sometimes an interger (1), sometimes a string ("1")
 
 This reflects legacy systems where type validation was weak or absent.
 
