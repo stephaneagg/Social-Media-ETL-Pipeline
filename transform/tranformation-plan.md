@@ -27,10 +27,11 @@ All data fields in the legacy data are not promised. Transormation logic should 
 
 **If an optional field is missing:**
 - Set value of None or generate default
+- In the case of image_url and profile_image_url, they do not exist in the legacy data. Omit them in the transformation and a null value will be assigned at insertion.
 
 **Generated defaults**
-- created_at
-  - Generate synthetic timestamp of current time at runtime
+<!-- - created_at
+  - Generate synthetic timestamp of current time at runtime -->
 - password_hash
   - Generate placeholder hash: `"LEGACY_MIGRATION_PLACEHOLDER"`
 - role
@@ -61,7 +62,7 @@ All data fields in the legacy data are not promised. Transormation logic should 
 - id
 - post_id
 - user_id
-- created_at
+<!-- - created_at -->
 
 **Optional:**
 - content

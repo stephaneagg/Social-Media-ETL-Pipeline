@@ -6,7 +6,7 @@ The following defines the target database as well as exactly how the transformed
 | Column | Required | Description |
 | :--- | :--- | :--- |
 | Id | Yes | Primary Key |
-| created_at | Yes | Account creation timestamp |
+| created_at | Yes (created at insertion) | Account creation timestamp |
 | username | Yes | Unique user handle |
 | display_name | No | User-visible handle |
 | profile_image_url | No | Profile Picture |
@@ -19,7 +19,6 @@ The following defines the target database as well as exactly how the transformed
 ```
 {
   "id": 1,
-  "created_at": "2026-05-09T12:00:00Z",
   "username": "bret",
   "display_name": "Leanne Graham",
   "profile_image_url": null,
@@ -37,7 +36,7 @@ The following defines the target database as well as exactly how the transformed
 | :--- | :--- | :--- |
 | Id | Yes | Primary Key |
 | user_id | Yes | FK -> users.id |
-| created_at | Yes | Post timestamp |
+| created_at | Yes (created at insertion) | Post timestamp |
 | image_url | No | Optional media |
 | content_text | No | Post Content |
 
@@ -46,8 +45,6 @@ The following defines the target database as well as exactly how the transformed
 {
   "id": 1,
   "user_id": 1,
-  "created_at": "2026-05-09T12:00:00Z",
-  "image_url": null,
   "content_text": "Post body..."
 }
 ```
@@ -61,7 +58,7 @@ The following defines the target database as well as exactly how the transformed
 | Id | Yes | Primary Key |
 | user_id | Yes | FK -> users.id |
 | post_id | Yes | FK -> posts.id |
-| created_at | Yes | Comment timestamp |
+| created_at | Yes (created at insertion) | Comment timestamp |
 | content | No | Comment body |
 
 ### Transformation Output
@@ -70,7 +67,6 @@ The following defines the target database as well as exactly how the transformed
   "id": 1,
   "post_id": 1,
   "user_id": 1,
-  "created_at": "2026-05-09T12:00:00Z",
   "content": "Comment body"
 }
 ```
