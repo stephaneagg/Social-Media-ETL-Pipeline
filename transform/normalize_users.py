@@ -1,6 +1,6 @@
 # transform/normalize_uers.py
 
-from datetime import datetime
+# from datetime import datetime
 from utils import (
   resolve_field,
   normalize_id,
@@ -54,11 +54,11 @@ def normalize_user(user):
   # return normalized user as JSON object
     return {
       "id" : user_id,
-      "created_at": datetime.utcnow().isoformat(),
+      # "created_at": datetime.utcnow().isoformat(),
       "username": username,
       "display_name": display_name,
-      "profile_image_url": None,
-      "bio": None,
+      # "profile_image_url": None,
+      # "bio": None,
       "email": email,
       "password_hash": "LEGACY_MIGRATION_PLACEHOLDER",
       "role": "USER"
@@ -66,13 +66,13 @@ def normalize_user(user):
   except Exception:
       return None
 
+# Testing
+# if __name__ == "__main__":
+#   import json
 
-if __name__ == "__main__":
-  import json
+#   with open("../legacy-data/users.json") as f:
+#     users = json.load(f)
 
-  with open("../legacy-data/users.json") as f:
-    users = json.load(f)
+#   normalized_users = normalize_users(users)
 
-  normalized_users = normalize_users(users)
-
-  print(normalized_users[:2])
+#   print(normalized_users[:2])

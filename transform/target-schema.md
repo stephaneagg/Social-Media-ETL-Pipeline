@@ -21,10 +21,8 @@ The following defines the target database as well as exactly how the transformed
   "id": 1,
   "username": "bret",
   "display_name": "Leanne Graham",
-  "profile_image_url": null,
-  "bio": null,
   "email": "sincere@april.biz",
-  "password_hash": "<generated>",
+  "password_hash": "LEGACY_MIGRATION_PLACEHOLDER",
   "role": "USER"
 }
 ```
