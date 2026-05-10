@@ -1,5 +1,6 @@
 
-
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 def resolve_field(record, aliases):
   """
@@ -42,3 +43,8 @@ def normalize_email(email):
     return None
 
   return email.strip().lower()
+
+
+def make_timestamp():
+  dt = datetime.now(ZoneInfo("America/Vancouver"))
+  return dt.strftime("%Y-%m-%d %H:%M:%S.") + f"{dt.microsecond // 1000:03d} " + dt.strftime("%z")

@@ -4,7 +4,8 @@ from utils import (
   resolve_field,
   normalize_id,
   normalize_text,
-  normalize_email
+  normalize_email,
+  make_timestamp
 )
 
 def normalize_posts(posts):
@@ -46,6 +47,7 @@ def normalize_post(post):
     return {
       "id": post_id,
       "user_id": user_id,
+      "created_at": make_timestamp(),
       "content": content_text
     }
 

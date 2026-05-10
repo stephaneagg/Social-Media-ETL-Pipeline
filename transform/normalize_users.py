@@ -1,11 +1,11 @@
 # transform/normalize_uers.py
 
-# from datetime import datetime
 from utils import (
   resolve_field,
   normalize_id,
   normalize_text,
-  normalize_email
+  normalize_email,
+  make_timestamp
 )
 
 def normalize_users(users):
@@ -54,7 +54,7 @@ def normalize_user(user):
   # return normalized user as JSON object
     return {
       "id" : user_id,
-      # "created_at": datetime.utcnow().isoformat(),
+      "created_at": make_timestamp(),
       "username": username,
       "display_name": display_name,
       # "profile_image_url": None,
