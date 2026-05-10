@@ -52,13 +52,13 @@ def normalize_post(post):
   except Exception:
     return None
 
+# Testing
+# if __name__ == "__main__":
+#   import json
 
-if __name__ == "__main__":
-  import json
+#   with open("../legacy-data/posts.json") as f:
+#     posts = json.load(f)
 
-  with open("../legacy-data/posts.json") as f:
-    posts = json.load(f)
+#   normalized_posts = normalize_posts(posts)
 
-  normalized_posts = normalize_posts(posts)
-
-  print(normalized_posts[:2])
+#   print(normalized_posts[:2])
