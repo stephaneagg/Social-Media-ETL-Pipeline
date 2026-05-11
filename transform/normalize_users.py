@@ -1,6 +1,6 @@
 # transform/normalize_uers.py
 
-from utils import (
+from transform.utils import (
   resolve_field,
   normalize_id,
   normalize_text,
@@ -8,15 +8,23 @@ from utils import (
   make_timestamp
 )
 
-DEFAULT_COMMENT_USER = {
-    "id": 0,
-    "created_at": make_timestamp(),
-    "username": "legacy_user",
-    "display_name": "Mysterious User",
-    "email": "legacy@system.local",
-    "password_hash": "LEGACY_SYSTEM_ACCOUNT",
-    "role": "USER"
-}
+def get_default_comment_user():
+    return {
+        "id": 0,
+        "created_at": make_timestamp(),
+        "username": "legacy_user",
+        "display_name": "Mysterious User",
+        "email": "legacy@system.local",
+        "password_hash": "LEGACY_SYSTEM_ACCOUNT",
+        "role": "USER"
+    }
+
+def create_report():
+    return {
+        "processed": 0,
+        "skipped": 0,
+        "skip_reasons": []
+    }
 
 def normalize_users(users):
   """
@@ -24,15 +32,21 @@ def normalize_users(users):
   users: the list of users that need to be normalized
   """
   normalized_users = []
+  report = create_report()
 
   for user in users:
-    normalized_user = normalize_user(user)
+    normalized_user, reason = normalize_user(user)
 
     if normalized_user:
       normalized_users.append(normalized_user)
+      report["processed"] += 1
+    else:
+      report["skipped"] += 1
+      if reason:
+          report["skip_reasons"].append(reason)
 
-  normalized_users.append(DEFAULT_COMMENT_USER)
-  return normalized_users
+  normalized_users.append(get_default_comment_user())
+  return normalized_users, report
 
 def normalize_user(user):
   """
@@ -59,8 +73,12 @@ def normalize_user(user):
     )
 
   # Validate required fields. If invalid skip the record
-    if (not user_id or not username or not email) :
-      return None
+    if not user_id:
+        return None, "missing_or_invalid_id"
+    if not username:
+        return None, f"user_id={user.get('id')} missing_username"
+    if not email:
+        return None, f"user_id={user.get('id')} missing_email"
 
   # return normalized user as JSON object
     return {
@@ -73,9 +91,10 @@ def normalize_user(user):
       "email": email,
       "password_hash": "LEGACY_MIGRATION_PLACEHOLDER",
       "role": "USER"
-    }
-  except Exception:
-      return None
+    }, None
+
+  except Exception as e:
+      return None, f"user_id={user.get('id')} exception={str(e)}"
 
 # Testing
 # if __name__ == "__main__":
@@ -84,6 +103,7 @@ def normalize_user(user):
 #   with open("../legacy-data/users.json") as f:
 #     users = json.load(f)
 
-#   normalized_users = normalize_users(users)
+#   normalized_users, user_report = normalize_users(users)
 
 #   print(normalized_users[:2])
+#   print(user_report)
