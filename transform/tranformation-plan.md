@@ -129,6 +129,12 @@ Because of dependencies, the transformation pipeline must execute in the followi
 2) Transform Posts
 3) Transform Comments
 
+
+## Validation
+Perform global integrity checks on all tranformed data before moving on to insertion
+- Ensure all foreign keys are valid
+- Detect duplicates
+
 ## Transformation Summary Report
 The following is generated at completion:
 ```

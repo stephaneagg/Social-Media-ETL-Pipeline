@@ -1,9 +1,9 @@
 
-
+from extract.extract import extract
 from transform.normalize_users import normalize_users
 from transform.normalize_posts import normalize_posts
 from transform.normalize_comments import normalize_comments
-from extract.extract import extract
+from transform.validate import validate_data
 
 
 raw_users = extract("legacy-data/users.json")
@@ -24,6 +24,10 @@ comments, comment_report = normalize_comments(
     post_ids
 )
 
-print(user_report)
-print(post_report)
-print(comment_report)
+validation_report = validate_data(users, posts, comments)
+
+print(validation_report)
+
+# print(user_report)
+# print(post_report)
+# print(comment_report)
