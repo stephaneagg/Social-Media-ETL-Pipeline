@@ -1,10 +1,10 @@
 import psycopg2
 
-DBNAME="pgdev"
-USER="stephg"
-PASSWORD="password"
-HOST="localhost"
-PORT=5332
+DBNAME=""
+USER=""
+PASSWORD=""
+HOST=""
+PORT=0
 
 def get_connection():
     return psycopg2.connect(
