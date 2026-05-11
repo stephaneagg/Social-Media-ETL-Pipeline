@@ -74,4 +74,44 @@ These final inconsistencies were introduced to reflect real-world data quality i
 - Inconsistent whitespace in string fields
 - Inconsistent casing (uppercase vs lowercase emails)
 
-### 3. Transform
+## 3. Transform Phase
+Responsible for converting inconsistent legacy records into normalized, schema-compatible objects that can be safely inserted into normalized, schema-compatible objects that can be safely inserted into the PostgreSQL database
+
+This stage performs:
+- Schema normalization
+- Field cleaning
+- Type coercion
+- Timestamp generation
+- Foreign key validation
+- Transformation reporting
+- Validation
+
+## 4. Load Phase
+Inserts validated data into the PostgreSQL database
+
+**Database information and credentials must be added into load.py**
+
+This stage performs:
+- Database connection management
+- Transaction handling
+- Ordered inserts
+- Conflict-safe persistence
+- Load reporting
+
+### Insert Order
+To preserve referential integrity, data is inserted in the following order:
+1. Users
+2. Posts
+3. Comments
+
+## Conflict Handling
+- ```
+  ON CONFLICT DO NOTHING
+  ```
+  This allows rerunning the pipleine without duplicate insertion failures.
+- All inserts are wrapped in a database transaction
+
+## 5. Pipeline Orchestration
+Handled by run_pipeline.py
+
+This script orchestrates all ETL stages.
