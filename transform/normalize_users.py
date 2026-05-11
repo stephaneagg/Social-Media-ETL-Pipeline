@@ -8,6 +8,16 @@ from utils import (
   make_timestamp
 )
 
+DEFAULT_COMMENT_USER = {
+    "id": 0,
+    "created_at": make_timestamp(),
+    "username": "legacy_user",
+    "display_name": "Mysterious User",
+    "email": "legacy@system.local",
+    "password_hash": "LEGACY_SYSTEM_ACCOUNT",
+    "role": "USER"
+}
+
 def normalize_users(users):
   """
   Returns a clean list of normalized users
@@ -21,6 +31,7 @@ def normalize_users(users):
     if normalized_user:
       normalized_users.append(normalized_user)
 
+  normalized_users.append(DEFAULT_COMMENT_USER)
   return normalized_users
 
 def normalize_user(user):

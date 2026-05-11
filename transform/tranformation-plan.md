@@ -36,6 +36,8 @@ All data fields in the legacy data are not promised. Transormation logic should 
   - Generate placeholder hash: `"LEGACY_MIGRATION_PLACEHOLDER"`
 - role
   - Generate default value: `"USER"`
+- user_id
+  - In the comments data, since a user_id is not specified a default user_id 0 will be used
 
 ### User Rules
 **Required:**
@@ -75,6 +77,38 @@ The email field in user data should be normalized to resolve inconsistent capita
 
 **Text Normalization:**
 Text fields (display_name, post content, comments) should be normalized to remove whitespace
+
+## Comment Author Attribution Handling
+The legacy comment data does not contain a user_id field, while the target database schema requires every comment to reference an existing user through a foeign key constraint.
+
+To preserve all comment records during migration while maintaining referential integrity, the transformation pipeline creates a defailt system user during the user normalization stage.
+
+**Default User Record:**
+```
+{
+  "id": 0,
+  "created_at": <generated>,
+  "username": "legacy_user",
+  "display_name": "Mysterious User",
+  "email": "legacy@system.local",
+  "password_hash": "LEGACY_SYSTEM_ACCOUNT",
+  "role": "USER"
+}
+```
+
+**Transformation Rule:**
+<br>All normalized comment records are assigned:
+```
+"user_id": 0
+```
+
+**Rationale:**
+
+This approach was selected because it:
+- preserves all legacy comment data
+- satisfies foreign key constraints in the target schema
+- avoids generating artificial user-to-comment relationships
+- clearly identifies comments with unknown original authorship
 
 ## Relationship Validation
 Since the target database schema enforces foreign keys, entity relationships must be valid
