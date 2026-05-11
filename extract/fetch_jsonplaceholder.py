@@ -10,8 +10,8 @@ def fetch(endpoint):
     return response.json()
 
 def save(data, filename):
-    Path("../data").mkdir(exist_ok=True)
-    with open(f"../data/{filename}", "w") as f:
+    Path("../data/raw").mkdir(parents=True, exist_ok=True)
+    with open(f"../data/raw/{filename}", "w") as f:
         json.dump(data, f, indent=2)
 
 def main():
