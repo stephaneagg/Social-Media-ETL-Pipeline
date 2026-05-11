@@ -8,6 +8,10 @@ from transform.validate import validate_data
 from load.load import load_all
 
 def print_transform_report(report):
+    """
+    returns None
+    report: the full transformation stage report
+    """
     print("\n===== ETL PIPELINE REPORT =====\n")
 
     for section, data in report.items():
@@ -22,6 +26,10 @@ def print_transform_report(report):
         print()
 
 def print_transform_summary(report):
+    """
+    returns None
+    report: the full transformation stage report
+    """
     total_processed = (
         report["users"]["processed"] +
         report["posts"]["processed"] +
@@ -40,6 +48,10 @@ def print_transform_summary(report):
 
 
 def print_load_report(report):
+    """
+    returns None
+    report: the load stage report
+    """
     print("\n===== LOAD REPORT =====")
 
     if report["status"] == "FAILED":
@@ -91,7 +103,8 @@ print_transform_report(pipeline_report)
 print_transform_summary(pipeline_report)
 
 
-
+# load validated data
 load_report = load_all(users, posts, comments)
 
+# log load results
 print_load_report(load_report)

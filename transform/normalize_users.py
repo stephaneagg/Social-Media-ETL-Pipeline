@@ -9,22 +9,25 @@ from transform.utils import (
 )
 
 def get_default_comment_user():
-    return {
-        "id": 0,
-        "created_at": make_timestamp(),
-        "username": "legacy_user",
-        "display_name": "Mysterious User",
-        "email": "legacy@system.local",
-        "password_hash": "LEGACY_SYSTEM_ACCOUNT",
-        "role": "USER"
-    }
+  return {
+    "id": 0,
+    "created_at": make_timestamp(),
+    "username": "legacy_user",
+    "display_name": "Mysterious User",
+    "email": "legacy@system.local",
+    "password_hash": "LEGACY_SYSTEM_ACCOUNT",
+    "role": "USER"
+  }
 
 def create_report():
-    return {
-        "processed": 0,
-        "skipped": 0,
-        "skip_reasons": []
-    }
+  """
+  returns a blank normalization report
+  """
+  return {
+    "processed": 0,
+    "skipped": 0,
+    "skip_reasons": []
+  }
 
 def normalize_users(users):
   """

@@ -9,11 +9,14 @@ from transform.utils import (
 )
 
 def create_report():
-    return {
-        "processed": 0,
-        "skipped": 0,
-        "skip_reasons": []
-    }
+  """
+  returns a blank normalization report
+  """
+  return {
+      "processed": 0,
+      "skipped": 0,
+      "skip_reasons": []
+  }
 
 def normalize_posts(posts, valid_user_ids):
   """
@@ -83,6 +86,10 @@ def normalize_post(post, valid_user_ids):
 #   with open("../legacy-data/posts.json") as f:
 #     posts = json.load(f)
 
-#   normalized_posts = normalize_posts(posts)
+#   normalized_posts, report = normalize_posts(
+#     posts,
+#     {0, 1, 2}
+#   )
 
 #   print(normalized_posts[:2])
+#   print(report)

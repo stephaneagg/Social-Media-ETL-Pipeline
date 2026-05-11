@@ -4,13 +4,15 @@ from transform.utils import (
   resolve_field,
   normalize_id,
   normalize_text,
-  normalize_email,
   make_timestamp
 )
 
 DEFAULT_COMMENT_USER_ID = 0
 
 def create_report():
+    """
+    returns a blank normalization report
+    """
     return {
         "processed": 0,
         "skipped": 0,
@@ -18,6 +20,11 @@ def create_report():
     }
 
 def normalize_comments(comments, valid_user_ids, valid_post_ids):
+  """
+  Returns a clean list of normalized comments
+  valid_user_ids: list of valid user_ids that user_id can map to
+  valid_post_ids: list of valid post_ids that post_id can map to
+  """
   normalized_comments = []
   report = create_report()
 
@@ -37,6 +44,11 @@ def normalize_comments(comments, valid_user_ids, valid_post_ids):
 
 
 def normalize_comment(comment, valid_user_ids, valid_post_ids):
+  """
+  Returns an object representing a comment with all attributes normalized
+  valid_user_ids: list of valid user_ids that user_id can map to
+  valid_post_ids: list of valid post_ids that post_ids can map to
+  """
 
   try:
 
@@ -95,6 +107,11 @@ def normalize_comment(comment, valid_user_ids, valid_post_ids):
 #   with open("../legacy-data/comments.json") as f:
 #     comments = json.load(f)
 
-#   normalized_comments = normalize_comments(comments)
+#   normalized_comments, report = normalize_comments(
+#     comments,
+#     {0, 1, 2},
+#     {1, 2, 3}
+#   )
 
 #   print(normalized_comments[:2])
+#   print(report)
