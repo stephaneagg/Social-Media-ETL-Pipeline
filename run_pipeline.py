@@ -5,6 +5,20 @@ from transform.normalize_posts import normalize_posts
 from transform.normalize_comments import normalize_comments
 from transform.validate import validate_data
 
+def print_report(report):
+    print("\n===== ETL PIPELINE REPORT =====\n")
+
+    for section, data in report.items():
+        print(f"--- {section.upper()} ---")
+
+        if isinstance(data, dict):
+            for key, value in data.items():
+                print(f"{key}: {value}")
+        else:
+            print(data)
+
+        print()
+
 
 raw_users = extract("legacy-data/users.json")
 raw_posts = extract("legacy-data/posts.json")
@@ -26,8 +40,12 @@ comments, comment_report = normalize_comments(
 
 validation_report = validate_data(users, posts, comments)
 
-print(validation_report)
 
-# print(user_report)
-# print(post_report)
-# print(comment_report)
+pipeline_report = {
+    "users": user_report,
+    "posts": post_report,
+    "comments": comment_report,
+    "validation": validation_report
+}
+
+print_report(pipeline_report)

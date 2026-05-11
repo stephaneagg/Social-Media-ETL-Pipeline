@@ -138,16 +138,24 @@ Perform global integrity checks on all tranformed data before moving on to inser
 ## Transformation Summary Report
 The following is generated at completion:
 ```
-Transformation Summary
-----------------------
-Users processed: X
-Users skipped: X
+===== ETL PIPELINE REPORT =====
 
-Posts processed: X
-Posts skipped: X
+--- USERS ---
+processed: X
+skipped: X
+skip_reasons: [X]
 
-Comments processed: X
-Comments skipped: X
+--- POSTS ---
+processed: X
+skipped: X
+skip_reasons: [X]
 
-Errors logged: X
+--- COMMENTS ---
+processed: X
+skipped: X
+skip_reasons: [X]
+
+--- VALIDATION ---
+valid: X
+errors: [X]
 ```
