@@ -159,6 +159,9 @@ skip_reasons: [X]
 valid: X
 errors: [X]
 
+--- STATUS ---
+X
+
 ===== SUMMARY =====
 Total processed: X
 Total skipped: X

@@ -62,7 +62,8 @@ pipeline_report = {
     "users": user_report,
     "posts": post_report,
     "comments": comment_report,
-    "validation": validation_report
+    "validation": validation_report,
+    "status": "SUCCESS" if validation_report["valid"] else "FAILED"
 }
 
 print_report(pipeline_report)
