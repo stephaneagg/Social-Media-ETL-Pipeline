@@ -70,7 +70,7 @@ def normalize_post(post, valid_user_ids):
       "id": post_id,
       "user_id": user_id,
       "created_at": make_timestamp(),
-      "content": content_text
+      "content_text": content_text
     }, None
 
   except Exception as e:
