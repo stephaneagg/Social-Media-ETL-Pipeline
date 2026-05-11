@@ -158,4 +158,8 @@ skip_reasons: [X]
 --- VALIDATION ---
 valid: X
 errors: [X]
+
+===== SUMMARY =====
+Total processed: X
+Total skipped: X
 ```

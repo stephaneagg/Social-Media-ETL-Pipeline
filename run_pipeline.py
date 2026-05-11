@@ -19,6 +19,23 @@ def print_report(report):
 
         print()
 
+def print_summary(report):
+    total_processed = (
+        report["users"]["processed"] +
+        report["posts"]["processed"] +
+        report["comments"]["processed"]
+    )
+
+    total_skipped = (
+        report["users"]["skipped"] +
+        report["posts"]["skipped"] +
+        report["comments"]["skipped"]
+    )
+
+    print("===== SUMMARY =====")
+    print(f"Total processed: {total_processed}")
+    print(f"Total skipped: {total_skipped}")
+
 
 raw_users = extract("legacy-data/users.json")
 raw_posts = extract("legacy-data/posts.json")
@@ -49,3 +66,4 @@ pipeline_report = {
 }
 
 print_report(pipeline_report)
+print_summary(pipeline_report)
